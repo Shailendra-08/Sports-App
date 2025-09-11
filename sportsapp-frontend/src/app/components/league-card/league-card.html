@@ -1,0 +1,79 @@
+<div class="league-card" [class.favorite]="favoriteLeagueIds?.has(league.idLeague)">
+  <div class="card-header">
+    <div class="league-badge">
+      <div class="badge-circle">
+        <ng-container *ngIf="league?.strBadge && league.strBadge.trim() !== ''; else badgeText">
+          <img [src]="league.strBadge" alt="League Badge" class="badge-img" />
+        </ng-container>
+        <ng-template #badgeText>
+          <span class="badge-text">{{ getBadgeText() }}</span>
+        </ng-template>
+      </div>
+    </div>
+    <button class="favorite-btn" [disabled]="!isFavoritesPage && isFavorite()"
+      (click)="(isFavoritesPage || (showDeleteForFavorites && isFavorite())) ? onRemoveFavorite() : onToggleFavorite()"
+      [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'">
+
+      <ng-container *ngIf="isFavoritesPage; else heartIcon">
+        <lucide-icon name="trash-2" class="trash-icon"></lucide-icon>
+      </ng-container>
+
+      <ng-template #heartIcon>
+        <lucide-icon
+  name="heart"
+  [strokeWidth]="isFavorite() ? 3 : 1"
+  [ngStyle]="{
+    color: isFavorite() ? '#e63946' : '#6c757d'
+  }"
+  class="heart-icon">
+</lucide-icon>
+
+
+      </ng-template>
+    </button>
+  </div>
+
+  <div class="card-content">
+    <h3 class="league-title">{{ league.strLeague }}</h3>
+    <div class="league-details">
+      <div class="detail-item">
+        <lucide-icon name="zap" size="16"></lucide-icon>
+        <span><strong>Sport:</strong> {{ league.strSport }}</span>
+      </div>
+
+      <div class="detail-item">
+        <lucide-icon name="map-pin" size="16"></lucide-icon>
+        <span><strong>Country:</strong> {{ league.strCountry }}</span>
+      </div>
+
+      <div class="detail-item">
+        <lucide-icon name="hash" size="16"></lucide-icon>
+        <span><strong>League ID:</strong> {{ league.idLeague }}</span>
+      </div>
+
+      <!-- <div class="detail-item" *ngIf="league.strAlternate">
+        <lucide-icon name="tag" size="16"></lucide-icon>
+        <span><strong>Alternate Name:</strong> {{ league.strAlternate }}</span>
+      </div>
+    </div> -->
+
+      <div class="card-links" *ngIf="league.strYoutube || league.strWebsite">
+        <a *ngIf="league.strYoutube" [href]="'https://' + league.strYoutube" target="_blank" class="link-item youtube">
+          <lucide-icon name="youtube" size="16"></lucide-icon>
+          <span>YouTube</span>
+        </a>
+
+        <a *ngIf="league.strWebsite" [href]="'https://' + league.strWebsite" target="_blank" class="link-item website">
+          <lucide-icon name="globe" size="16"></lucide-icon>
+          <span>Website</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card-footer" *ngIf="showViewDetails">
+      <button class="view-details-btn" (click)="onViewDetails()">
+        <span>View Details</span>
+        <lucide-icon name="arrow-right" size="16"></lucide-icon>
+      </button>
+    </div>
+  </div>

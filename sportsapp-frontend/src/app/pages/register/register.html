@@ -1,0 +1,166 @@
+<div class="login-page">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Join SportHub</h1>
+      <p class="hero-subtitle">Create your account and start exploring amazing sports leagues!</p>
+
+      <form class="login-form" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+
+        <!-- Full Name -->
+        <div class="input-group">
+          <label for="fullName">Full Name</label>
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            required
+            minlength="3"
+            [(ngModel)]="formData.fullName"
+            #fullName="ngModel"
+            placeholder="Enter your full name"
+            (input)="onInputChange()"
+          />
+          <div *ngIf="fullName.invalid && fullName.touched" class="error-message">
+            Full name must be at least 3 characters.
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            [(ngModel)]="formData.email"
+            #email="ngModel"
+            placeholder="Enter your email"
+            (input)="onInputChange()"
+          />
+          <div *ngIf="email.invalid && email.touched" class="error-message">
+            Please enter a valid email.
+          </div>
+        </div>
+
+        <!-- Age -->
+        <div class="input-group">
+          <label for="age">Age</label>
+          <input
+            id="age"
+            name="age"
+            type="number"
+            min="13"
+            required
+            [(ngModel)]="formData.age"
+            #age="ngModel"
+            placeholder="Enter your age"
+            (input)="onInputChange()"
+          />
+          <div *ngIf="age.invalid && age.touched" class="error-message">
+            Age must be greater than 12.
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="input-group">
+          <label for="bio">Bio <span style="font-weight: normal; color: var(--text-secondary); font-size: 0.85rem;">(Optional)</span></label>
+          <textarea
+            id="bio"
+            name="bio"
+            rows="3"
+            maxlength="200"
+            [(ngModel)]="formData.bio"
+            placeholder="Tell us a bit about yourself and your favorite sports..."
+            (input)="onInputChange()"
+          ></textarea>
+          <div style="text-align: right; font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;">
+            {{ (formData.bio || '').length }}/200
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input
+              id="password"
+              name="password"
+              [type]="showPassword ? 'text' : 'password'"
+              required
+              minlength="6"
+              [(ngModel)]="formData.password"
+              #password="ngModel"
+              placeholder="Create a password"
+              (input)="onInputChange()"
+            />
+            <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+              <!-- Add eye icons if needed -->
+            </button>
+          </div>
+          <div *ngIf="password.invalid && password.touched" class="error-message">
+            Password must be at least 6 characters.
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="password-wrapper">
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              required
+              [(ngModel)]="formData.confirmPassword"
+              #confirmPassword="ngModel"
+              placeholder="Confirm your password"
+              (input)="onInputChange()"
+            />
+            <button type="button" (click)="toggleConfirmPasswordVisibility()" class="toggle-password">
+              <!-- Add eye icons if needed -->
+            </button>
+          </div>
+        </div>
+
+        <!-- Password Mismatch Error -->
+        <div *ngIf="error" class="error-message">
+          <p>{{ error }}</p>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="isLoading || !registerForm.form.valid"
+          class="login-btn"
+        >
+          <div *ngIf="isLoading" class="spinner"></div>
+          <ng-container *ngIf="!isLoading">
+            <span>Create Account</span>
+          </ng-container>
+        </button>
+
+        <!-- Already have account -->
+        <div class="register-link">
+          <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Optional: Decorative Cards (reuse if needed) -->
+    <div class="hero-decoration">
+      <div class="floating-card card-1">
+        <div class="mini-badge">⚽</div><span>Soccer</span>
+      </div>
+      <div class="floating-card card-2">
+        <div class="mini-badge">🏈</div><span>Football</span>
+      </div>
+      <div class="floating-card card-3">
+        <div class="mini-badge">🏒</div><span>Hockey</span>
+      </div>
+      <div class="floating-card card-4">
+        <div class="mini-badge">🏉</div><span>Rugby</span>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,379 @@
+.favorites-page {
+  min-height: 100vh;
+}
+
+.league-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+
+  .badge-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 768px) {
+  .league-badge {
+    max-width: 70px;
+    max-height: 70px;
+  }
+}
+
+
+.hero-section {
+  background: var(--gradient-secondary);
+  padding: 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    animation: float 15s ease-in-out infinite;
+  }
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  animation: fadeInUp 0.8s ease;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  &.sports-icon {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+  }
+
+  &.countries-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+  }
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.favorites-section {
+  padding: 3rem 0;
+  background: var(--background-primary);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+}
+
+.clear-all-btn {
+  background: var(--error-500);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--error-600);
+    transform: translateY(-2px);
+  }
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  animation: fadeInGrid 0.8s ease;
+}
+
+.favorite-card-item {
+  animation: slideInUp 0.6s ease both;
+
+  &:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+
+  &:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+}
+
+.empty-favorites {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+  animation: fadeInUp 0.8s ease;
+
+  .empty-icon {
+    color: var(--text-tertiary);
+    // margin-bottom: 2rem;
+    text-align: center;
+    margin: auto;
+    animation: pulse 2s ease-in-out infinite;
+     display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  h3 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin: 0 0 2.5rem 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+}
+
+.explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--primary-500);
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--primary-600);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(180deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInGrid {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+
+  .stats-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    h2 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .stats-cards {
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 0.75rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+}

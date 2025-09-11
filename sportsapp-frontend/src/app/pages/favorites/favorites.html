@@ -1,0 +1,50 @@
+<div class="favorites-page">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">My Favorites</h1>
+            <p class="hero-subtitle">{{ leagues.length }} leagues saved</p>
+
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <lucide-icon name="heart" size="24"></lucide-icon>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">{{ leagues.length }}</div>
+                        <div class="stat-label">Favorites</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="favorites-section">
+        <div class="container">
+            <div class="favorites-content" *ngIf="leagues.length > 0; else emptyFavorites">
+                <div class="favorites-grid">
+                    <app-league-card *ngFor="let league of leagues" [league]="league" [isFavoritesPage]="true"
+                        (remove)="removeFromFavorites(league.idLeague)"
+                        (viewDetails)="goToLeagueDetails(league.idLeague)"
+                         [showViewDetails]="true">
+                    </app-league-card>
+
+                </div>
+
+            </div>
+
+            <ng-template #emptyFavorites>
+                <div class="empty-favorites">
+                    <div class="empty-icon">
+                        <lucide-icon name="heart-off" size="80"></lucide-icon>
+                    </div>
+                    <h3>No favorites yet</h3>
+                    <p>Start exploring leagues and add them to your favorites to see them here.</p>
+                    <a routerLink="/home" class="explore-btn">
+                        <lucide-icon name="compass" size="20"></lucide-icon>
+                        Explore Leagues
+                    </a>
+                </div>
+            </ng-template>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,49 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="nav-brand">
+      <h1 class="brand-title">SportHub</h1>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a *ngIf="!isAuthPage" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+      <a *ngIf="!isAuthPage" routerLink="/favorites" routerLinkActive="active" class="nav-link">
+        <mat-icon>favorite</mat-icon>
+        <span>Favorites</span>
+      </a>
+      <a *ngIf="!isAuthPage" routerLink="/ai-search" routerLinkActive="active" class="nav-link">
+        <lucide-icon name="bot"></lucide-icon>
+        <span>AI Search</span>
+      </a>
+      <a *ngIf="!isAuthPage" routerLink="/profile" routerLinkActive="active" class="nav-link">
+        <mat-icon>account_circle</mat-icon>
+        <span>Profile</span>
+      </a>
+      <a *ngIf="!isAuthPage" routerLink="/" routerLinkActive="active" class="nav-link logout-btn">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+      <!-- <a *ngIf="isAuthPage" routerLink="/" routerLinkActive="active" class="nav-link logout-btn">
+        <mat-icon>logout</mat-icon>
+        <span>Register</span>
+      </a>
+      <a *ngIf="isAuthPage" routerLink="/" routerLinkActive="active" class="nav-link logout-btn">
+        <mat-icon>logout</mat-icon>
+        <span>Login</span>
+      </a> -->
+    </div>
+
+    <!-- Theme Toggle (Optional) -->
+    <button class="theme-toggle" (click)="toggleTheme()" [attr.aria-label]="'Switch to ' + (themeService.currentTheme === 'light' ? 'dark' : 'light') + ' mode'">
+      <div class="theme-toggle-track">
+        <div class="theme-toggle-thumb" [class.dark]="themeService.currentTheme === 'dark'">
+          <mat-icon>{{ themeService.currentTheme === 'light' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </div>
+      </div>
+    </button>
+  </div>
+</nav>

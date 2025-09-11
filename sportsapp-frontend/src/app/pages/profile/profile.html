@@ -1,0 +1,101 @@
+<div class="profile-page">
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="profile-avatar">
+        <lucide-icon name="user" size="48"></lucide-icon>
+      </div>
+      <h1 class="hero-title">Profile</h1>
+      <p class="hero-subtitle">Manage your SportHub account and preferences</p>
+    </div>
+  </section>
+
+  <section class="profile-section">
+    <div class="container">
+      <div class="profile-grid">
+
+        <!-- Account Info -->
+        <div class="profile-card">
+          <div class="card-header">
+            <lucide-icon name="user-circle" size="24"></lucide-icon>
+            <h3>Account Information</h3>
+          </div>
+          <div class="card-content">
+            <div class="info-item">
+              <label>Full Name</label>
+              <input type="text" [value]="userData.fullName" readonly class="info-input">
+            </div>
+            <div class="info-item">
+              <label>Email Address</label>
+              <input type="email" [value]="userData.email" readonly class="info-input">
+            </div>
+            <div class="info-item">
+              <label>Bio</label>
+              <input type="text" [value]="userData.bio" readonly class="info-input">
+            </div>
+            <div class="info-item">
+              <label>Age</label>
+              <input type="text" [value]="userData.age" readonly class="info-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="profile-card">
+          <div class="card-header">
+            <lucide-icon name="settings" size="24"></lucide-icon>
+            <h3>Preferences</h3>
+          </div>
+          <div class="card-content">
+            <div class="preference-item">
+              <div class="preference-info">
+                <label>Theme</label>
+                <span class="preference-desc">Choose your preferred color scheme</span>
+              </div>
+              <button class="theme-toggle-btn" (click)="toggleTheme()">
+                <div class="theme-option" [class.active]="themeService.currentTheme === 'light'">
+                  <lucide-icon name="sun" size="16"></lucide-icon> Light
+                </div>
+                <div class="theme-option" [class.active]="themeService.currentTheme === 'dark'">
+                  <lucide-icon name="moon" size="16"></lucide-icon> Dark
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="profile-card">
+          <div class="card-header">
+            <lucide-icon name="bar-chart-3" size="24"></lucide-icon>
+            <h3>Statistics</h3>
+          </div>
+          <div class="card-content">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-number">{{ favoriteCount }}</div>
+                <div class="stat-label">Favorite Leagues</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Actions -->
+        <div class="profile-card">
+          <div class="card-header">
+            <lucide-icon name="shield-check" size="24"></lucide-icon>
+            <h3>Account Actions</h3>
+          </div>
+          <div class="card-content">
+            <button (click)="Edit()" class="action-btn primary">
+              <lucide-icon name="edit" size="16"></lucide-icon> Edit Profile
+            </button>
+            <!-- <button class="action-btn secondary">
+              <lucide-icon name="key" size="16"></lucide-icon> Change Password
+            </button> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>

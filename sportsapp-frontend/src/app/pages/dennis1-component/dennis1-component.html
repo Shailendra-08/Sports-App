@@ -1,0 +1,61 @@
+<div class="league-card" [class.favorite]="league.isFavorite">
+  <div class="card-header">
+    <div class="league-badge">
+      <div class="badge-circle">
+        <span class="badge-text">{{ getBadgeText() }}</span>
+      </div>
+    </div>
+    <button 
+      class="favorite-btn" 
+      (click)="onToggleFavorite()"
+      [class.active]="league.isFavorite"
+      [attr.aria-label]="league.isFavorite ? 'Remove from favorites' : 'Add to favorites'">
+      <lucide-icon [name]="league.isFavorite ? 'heart' : 'heart'" [color]="league.isFavorite ? 'currentColor' : 'none'"></lucide-icon>
+    </button>
+  </div>
+
+  <div class="card-content">
+    <h3 class="league-title">{{ league.name }}</h3>
+    
+    <div class="league-details">
+      <div class="detail-item">
+        <lucide-icon name="zap" size="16"></lucide-icon>
+        <span><strong>Sport:</strong> {{ league.sport }}</span>
+      </div>
+      
+      <div class="detail-item">
+        <lucide-icon name="map-pin" size="16"></lucide-icon>
+        <span><strong>Country:</strong> {{ league.country }}</span>
+      </div>
+      
+      <div class="detail-item">
+        <lucide-icon name="hash" size="16"></lucide-icon>
+        <span><strong>League ID:</strong> {{ league.leagueId }}</span>
+      </div>
+      
+      <div class="detail-item" *ngIf="league.alternateName">
+        <lucide-icon name="tag" size="16"></lucide-icon>
+        <span><strong>Alternate Name:</strong> {{ league.alternateName }}</span>
+      </div>
+    </div>
+
+    <div class="card-links" *ngIf="league.youtube || league.website">
+      <a *ngIf="league.youtube" [href]="'https://' + league.youtube" target="_blank" class="link-item youtube">
+        <lucide-icon name="youtube" size="16"></lucide-icon>
+        <span>YouTube</span>
+      </a>
+      
+      <a *ngIf="league.website" [href]="'https://' + league.website" target="_blank" class="link-item website">
+        <lucide-icon name="globe" size="16"></lucide-icon>
+        <span>Website</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card-footer" *ngIf="showViewDetails">
+    <button class="view-details-btn" (click)="onViewDetails()">
+      <span>View Details</span>
+      <lucide-icon name="arrow-right" size="16"></lucide-icon>
+    </button>
+  </div>
+</div>

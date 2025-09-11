@@ -1,0 +1,80 @@
+<div class="ai-search-page">
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="ai-icon">
+        <lucide-icon name="bot" size="64"></lucide-icon>
+      </div>
+      <h1 class="hero-title">AI-Powered Search</h1>
+      <p class="hero-subtitle">Ask me anything about sports leagues and I'll help you find what you're looking for</p>
+
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <lucide-icon name="search" size="20"></lucide-icon>
+          <input type="text" placeholder="Ask about any sports league..." [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()" class="search-input" style="color: #1f2937 !important;">
+          <button class="search-btn" (click)="onSearch()" [disabled]="!searchQuery.trim() || isSearching">
+            <lucide-icon name="search" size="20"></lucide-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="quick-suggestions">
+        <h3>Try asking:</h3>
+        <div class="suggestions">
+          <button class="suggestion-chip"
+            (click)="searchQuery = 'What are the top football leagues in Europe?'; onSearch()">
+            Top European Football Leagues
+          </button>
+          <button class="suggestion-chip" (click)="searchQuery = 'Tell me about ice hockey leagues'; onSearch()">
+            Ice Hockey Leagues
+          </button>
+          <button class="suggestion-chip" (click)="searchQuery = 'Which leagues are most popular?'; onSearch()">
+            Most Popular Leagues
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="results-section" *ngIf="searchResults.length > 0 || isSearching">
+    <div class="container">
+      <div class="loading-state" *ngIf="isSearching">
+        <div class="loading-spinner"></div>
+        <p>AI is analyzing your query...</p>
+      </div>
+
+      <div class="search-results" *ngIf="!isSearching && searchResults.length > 0">
+        <div class="results-header">
+          <h2>Search Results</h2>
+          <button class="clear-btn" (click)="clearSearch()">
+            <lucide-icon name="x" size="16"></lucide-icon>
+            Clear
+          </button>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-card" *ngFor="let result of searchResults">
+            <div class="result-header">
+              <div *ngFor="let result of searchResults" class="">
+                <h3 class="result-title">{{ result.title }}</h3>
+                <p class="result-description" [innerHTML]="result.description"></p>
+              </div>
+
+            </div>
+            <!-- <p class="result-description">{{ result.description }}</p> -->
+            <div class="result-actions">
+              <!-- <button class="action-btn primary">
+                <lucide-icon name="external-link" size="16"></lucide-icon>
+                View Details
+              </button>
+              <button class="action-btn secondary">
+                <lucide-icon name="heart" size="16"></lucide-icon>
+                Add to Favorites
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

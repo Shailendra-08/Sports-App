@@ -1,0 +1,13 @@
+<h2 class="text-xl font-bold mb-4">Favorite Leagues</h2>
+
+<ul class="space-y-2">
+  <li *ngFor="let league of leagues" class="bg-gray-100 p-2 rounded shadow-sm flex justify-between items-center">
+    <div>
+      <div class="font-semibold">{{ league.name }}</div>
+      <div class="text-sm text-gray-600">{{ league.country }}</div>
+    </div>
+    <button (click)="removeLeague(league)" class="text-red-500 hover:text-red-700">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </li>
+</ul>

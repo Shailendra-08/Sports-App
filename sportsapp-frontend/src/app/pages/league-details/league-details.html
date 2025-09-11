@@ -1,0 +1,161 @@
+<div class="league-details-page" *ngIf="leagueData">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <img [src]="fanartImages()[0]" alt="League background" class="hero-bg-image" />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <button class="back-btn" (click)="goBack()">
+        <lucide-icon name="arrow-left" size="20"></lucide-icon>
+      </button>
+
+      <div class="league-header">
+        <div class="league-badge">
+          <div class="badge-circle">
+            <img [src]="leagueData.strBadge" alt="League Badge" />
+          </div>
+        </div>
+
+        <div class="league-info">
+          <h1 class="league-title">{{ leagueData.strLeague }}</h1>
+          <div class="league-meta">
+            <span class="meta-item">
+              <lucide-icon name="map-pin" size="16"></lucide-icon>
+              {{ leagueData.strCountry }}
+            </span>
+            <span class="meta-item">
+              <lucide-icon name="calendar" size="16"></lucide-icon>
+              {{ leagueData.strCurrentSeason }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <div class="content-grid">
+        <!-- Main Content -->
+        <div class="main-content">
+          <!-- Language Selector -->
+          <div class="language-selector">
+            <button *ngFor="let lang of languages" (click)="selectLanguage(lang.code)"
+              [class.active]="selectedLanguage() === lang.code" class="lang-btn">
+              <span class="flag">{{ lang.flag }}</span>
+              {{ lang.name }}
+            </button>
+          </div>
+
+          <!-- Description -->
+          <div class="description-section">
+            <h2>About {{ leagueData.strLeague }}</h2>
+            <p>{{ currentDescription() }}</p>
+            <p class="language-note">Language: {{ currentLanguageName() }}</p>
+          </div>
+
+          <!-- Fanart Gallery -->
+          <div class="gallery-section" *ngIf="fanartImages().length">
+            <div class="main-gallery">
+              <div class="gallery-container">
+                <!-- <img [src]="selectedFanart()" alt="Fanart" class="main-image" /> -->
+                 <img 
+  [src]="selectedFanart()" 
+  alt="Fanart" 
+  (error)="onImageError($event, 'assets/default-fanart.png')" 
+/>
+
+                <button class="gallery-nav prev" (click)="prevImage()">
+                  <lucide-icon name="arrow-left" size="24"></lucide-icon>
+                </button>
+                <button class="gallery-nav next" (click)="nextImage()">
+                  <lucide-icon name="arrow-right" size="24"></lucide-icon>
+                </button>
+
+                <div class="image-counter">
+                  {{ currentImageIndex() + 1 }} / {{ fanartImages().length }}
+                </div>
+              </div>
+
+              <div class="thumbnail-gallery">
+                <button *ngFor="let image of fanartImages(); let i = index" [class.active]="currentImageIndex() === i"
+                  (click)="selectImage(i)" class="thumbnail">
+                  <img [src]="image" [alt]="'Thumbnail ' + (i + 1)" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="info-card">
+            <h3>
+              <lucide-icon name="info" size="20"></lucide-icon>
+              League Information
+            </h3>
+            <div class="info-list">
+              <div class="info-item">
+                <span class="label">Founded</span>
+                <span class="value">{{ leagueData.intFormedYear }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">First Event</span>
+                <span class="value">{{ leagueData.dateFirstEvent | date:'MMM d, y' }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Current Season</span>
+                <span class="value">{{ leagueData.strCurrentSeason }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Sport</span>
+                <span class="value">{{ leagueData.strSport }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">ID</span>
+                <span class="value">{{ leagueData.idLeague }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="connect-card" *ngIf="socialLinks().length">
+            <h3>Connect with Us</h3>
+            <div class="social-links">
+              <a *ngFor="let link of socialLinks()" [href]="'https://' + link.url" class="social-link" target="_blank">
+                <span>{{ link.icon }}</span> {{ link.name }}
+              </a>
+            </div>
+          </div>
+
+          <div class="assets-card">
+            <h3>League Assets</h3>
+            <div class="assets-grid">
+              <div class="asset-item">
+                <!-- <img [src]="leagueData.strBadge" alt="Badge" /> -->
+                <img [src]="leagueData.strBadge" alt="Badge"
+                  (error)="onImageError($event, 'assets/default-badge.png')" />
+
+
+
+
+
+                <span class="asset-label">Official Badge</span>
+              </div>
+              <div class="asset-item">
+                <img [src]="leagueData.strPoster" alt="Poster" />
+                <span class="asset-label">Official Poster</span>
+              </div>
+              <div class="asset-item">
+                <img [src]="leagueData.strTrophy" alt="Trophy" />
+                <span class="asset-label">Championship Trophy</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

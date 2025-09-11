@@ -1,0 +1,83 @@
+<div class="home-page">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Discover Sports Leagues</h1>
+      <p class="hero-subtitle">Explore amazing sports leagues from around the world</p>
+
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <lucide-icon name="search" size="20"></lucide-icon>
+          <input type="text" placeholder="Search leagues by name..." [(ngModel)]="searchQuery" (input)="onSearch()"
+            class="search-input">
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-decoration">
+      <div class="floating-card card-1">
+        <div class="mini-badge">⚽</div>
+        <span>Soccer</span>
+      </div>
+      <div class="floating-card card-2">
+        <div class="mini-badge">🏈</div>
+        <span>Football</span>
+      </div>
+      <div class="floating-card card-3">
+        <div class="mini-badge">🏒</div>
+        <span>Hockey</span>
+      </div>
+      <div class="floating-card card-4">
+        <div class="mini-badge">🏉</div>
+        <span>Rugby</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-container">
+        <div class="filter-group">
+          <select [(ngModel)]="selectedSport" class="sport-filter">
+            <option value="">All Sports</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Motorsport">Motorsport</option>
+            <option value="Cricket">Cricket</option>
+            <option value="Badminton">Badminton</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select [(ngModel)]="selectedCountry" (change)="onCountryChange()" class="country-filter">
+            <option value="">All Countries</option>
+            <option *ngFor="let country of availableCountries" [value]="country">{{ country }}</option>
+          </select>
+        </div>
+
+        <div class="results-count">
+          <span class="count-text">{{ filteredLeagues.length }} leagues found</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leagues-section">
+    <div class="container">
+      <div class="leagues-grid" *ngIf="filteredLeagues.length > 0; else noResults">
+        <app-league-card *ngFor="let league of filteredLeagues; trackBy: trackByLeague" [league]="league"
+          [showViewDetails]="true" [favoriteLeagueIds]="favoriteLeagueIds" [showDeleteForFavorites]="true"
+          (toggleFavorite)="onToggleFavorite($event)" (viewDetails)="onViewDetails($event)">
+        </app-league-card>
+
+      </div>
+
+      <ng-template #noResults>
+        <div class="no-results">
+          <lucide-icon name="search-x" class="iconn" size="64"></lucide-icon>
+          <h3>No leagues found</h3>
+          <p>Try adjusting your search criteria or browse all available leagues.</p>
+          <button class="clear-filters-btn" (click)="clearFilters()">Clear Filters</button>
+        </div>
+      </ng-template>
+    </div>
+  </section>
+</div>
